@@ -1,9 +1,10 @@
-import {getGoods} from '../../api/goodsApi'
+import {getGoods,getGoodsById} from '../../api/goodsApi'
 
 const goods = {
   state: {
     //相当于初始化数据
-    goodsInfo : []
+    goodsList : [],
+    goods : {}
    /* id: '',
     name: '',
     price: '',
@@ -13,8 +14,11 @@ const goods = {
   },
   mutations: {
     //相当于数据赋值
-    SET_GOODS_INFO : (state, goodsInfo) =>{
-      state.goodsInfo = goodsInfo
+    SET_GOODS_INFO : (state, goodsList) =>{
+      state.goodsList = goodsList
+    },
+    SET_GOODS : (state, goods) =>{
+      state.goods = goods
     }
    /* SET_ID: (state, id) => {
       state.id = id
@@ -42,8 +46,8 @@ const goods = {
         getGoods().then(res => {
           console.log(res);
           if (res.code === 200) {
-            const goodsInfo = res.data.goodsInfo
-            commit('SET_GOODS_INFO', goodsInfo)
+            const goodsList = res.data.goodsInfo
+            commit('SET_GOODS_INFO', goodsList)
            /* commit('SET_ID', id)
             commit('SET_NAME', name)
             commit('SET_PRICE', price)
@@ -54,6 +58,16 @@ const goods = {
           resolve()
         }).catch(error => {
           reject(error)
+        })
+      })
+    },
+    goods ({ commit },id){
+      return new Promise((resolve, reject) =>{
+        getGoodsById(id).then(res =>{
+          console.log('getById -->'+ JSON.stringify(res));
+          if (res.code === 200){
+            commit('SET_GOODS',res.data.goodsInfo)
+          }
         })
       })
     }

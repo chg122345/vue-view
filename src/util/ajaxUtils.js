@@ -3,7 +3,10 @@ import axios from 'axios'
 // create an axios instance
 const ajax = axios.create({
   baseURL: '/api', // api 的 base_url
-  timeout: 5000 // request timeout
+  timeout: 5000 ,// request timeout
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'  //请求头
+  },
 })
 
 // request interceptor

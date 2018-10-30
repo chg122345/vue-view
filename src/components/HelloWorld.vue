@@ -4,7 +4,7 @@
       <el-col :span="20" :offset="2"> <p>{{msg}}</p>
 
         <el-row>
-          <el-col :span="8"  v-for="(item,index) in goods.goodsInfo" :key="index">
+          <el-col :span="8"  v-for="(item,index) in goods.goodsList" :key="index">
             <el-card :body-style="{ padding: '0px' }">
               <img :src="item.img" class="image" width="100%" height="100%">
               <div style="padding: 14px;">
@@ -20,7 +20,7 @@
         </el-row>
       </el-col>
     </el-row>
-
+    <el-button @click="showGoods(15)">跳转按钮</el-button>
   </div>
 </template>
 
@@ -39,6 +39,9 @@ export default {
       this.$alert(content, '商品详情', {
         confirmButtonText: '确定',
       });
+    },
+    showGoods (id){
+      this.$store.dispatch('goods',id)
     }
   },
   computed :{

@@ -6,6 +6,8 @@ import router from './router'
 import Element from 'element-ui'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/display.css';
+import './assets/iconfont/iconfont.css'
 
 
 Vue.config.productionTip = false;
